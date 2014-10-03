@@ -1,5 +1,5 @@
 module TollFree
-  class Lookup
+  class Digit
     def initialize number
       @number=number
       @lookuphash = { 
