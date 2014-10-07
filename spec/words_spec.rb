@@ -5,10 +5,10 @@ require_relative "../lib/toll_free/dictionary"
 
 describe TollFree::FindWords do
   it "gets a list of words" do
-    findwords = TollFree::FindWords.new("232")
+    findwords = TollFree::FindWords.new("323")
     dictionary = TollFree::Dictionary.new("/usr/share/dict/words")
     findwords.possibilities.select {|possibility|  
       dictionary.include?(possibility)
-    }.must_equal(%w[ada bea])
+    }.must_equal(%w[dad fad dae fae].sort)
   end
 end
