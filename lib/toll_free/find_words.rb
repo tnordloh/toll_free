@@ -16,7 +16,6 @@ module TollFree
         possibility.join("")
       }
       @wordlist=possibilities.flat_map {|possibility| 
-        puts "checking #{possibility}"
         subwords(possibility)
       }
     end
