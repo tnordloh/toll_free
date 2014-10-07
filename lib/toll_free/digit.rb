@@ -13,7 +13,11 @@ module TollFree
         9 => %w[w x y z]
       }
     end
+    def valid?
+      !!@lookuphash[@number]
+    end
     def letters
+      fail "invalid number" unless valid?
       @lookuphash[@number]
     end
   end

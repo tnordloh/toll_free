@@ -7,8 +7,14 @@ describe TollFree::Digit do
     lookup = TollFree::Digit.new(2)
     lookup.letters.must_equal(%w[a b c])
   end
-  it "rejects invalid entries" do
+  it "catches invalid entries" do
     lookup = TollFree::Digit.new(0)
-    lookup.letters.must_be_nil()
+    -> do
+        lookup.letters
+    end.must_raise(RuntimeError)
+  end
+  it "knows if a number is valid" do
+    lookup = TollFree::Digit.new(0)
+    lookup.valid?.must_equal(false)
   end
 end
