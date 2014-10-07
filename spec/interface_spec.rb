@@ -20,8 +20,8 @@ describe TollFree do
   end
   it "returns a valid word list" do
     tollfree = TollFree.find_numbers("/usr/share/dict/words","23")
-    tollfree.must_equal("a-d\nad\na-e\nae\na-f\nb-d\nb-e\n"+
-                             "be\nb-f\nc-d\nc-e\n"+
-                             "ce\nc-f")
+    tollfree.must_equal("A-D\nAD\nA-E\nAE\nA-F\nB-D\nB-E\n"+
+                             "BE\nB-F\nC-D\nC-E\n"+
+                             "CE\nC-F")
   end
 end

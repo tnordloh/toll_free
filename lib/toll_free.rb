@@ -8,7 +8,6 @@ module TollFree
 
     tollfree = TollFree::FindWords.new(phone_number, dictionary)
     tollfree.possibilities
-    tollfree.to_s
-    puts tollfree.to_s.upcase!
+    tollfree.to_s.upcase!
   end
 end

@@ -2,7 +2,8 @@ require_relative "digit"
 require_relative "dictionary"
 module TollFree
   class FindWords
-    def initialize phonenumber, dictionary = "/Users/tim/code/toll_free/conf/words"
+    def initialize phonenumber, 
+                   dictionary = "/Users/tim/code/toll_free/conf/words"
       @digits = phonenumber.chars.map {|char|
         TollFree::Digit.new(char.to_i)
       }
