@@ -1,5 +1,6 @@
 require_relative "digit"
 require_relative "dictionary"
+require_relative "words_from_letters"
 module TollFree
   class FindWords
     def initialize phonenumber, 
@@ -24,26 +25,18 @@ module TollFree
       @wordlist.join("\n")
     end
     def subwords this_word 
-      chararray = this_word.split(//)
-      words = []
-      words << chararray 
-      words.each {|word|
-        (1..word.size-1).each {|joinhere|
-          temp = word.dup
-          placeholder= temp.delete_at(joinhere)
-          temp[joinhere-1]=temp[joinhere-1]+ placeholder
-          words << temp unless words.include?(temp)
-        }
-      }
-      words.select! {|word| all_subwords_valid?(word) }
-      words.map {|word| word.join("-")}
-    end
-    private
-    def all_subwords_valid? list
-      value=list.all? {|testword|
-        @dictionary.include?(testword)
-      }
-      value
+      wfl=TollFree::WordsFromLetters.new(@dictionary, this_word)
+      startlist =wfl.find
+      finallist = []
+      while startlist.size > 0 
+        list = startlist.shift
+        if list.unmatched_string == ""
+          finallist << list
+        else
+          list.find.each {|item| startlist << item}
+        end
+      end
+      finallist.flat_map {|item| item.to_s }
     end
   end
 end

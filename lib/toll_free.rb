@@ -5,6 +5,7 @@ module TollFree
   def self.find_numbers(dictionary, phone_number)
 
     fail "Dictionary file doesn't exist" unless File.exist?(dictionary) 
+    puts "made it past dictionary"
 
     tollfree = TollFree::FindWords.new(phone_number, dictionary)
     tollfree.possibilities

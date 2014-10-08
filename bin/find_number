@@ -9,6 +9,7 @@ begin
     ARGV.delete_at(index)
     dictionary= ARGV.delete_at(index)
   end
+  puts "running with dictionary #{dictionary}, number #{ARGV[0]}"
   puts TollFree.find_numbers(dictionary,ARGV[0])
 rescue
   abort "USAGE:  #{$PROGRAM_NAME} PHONE_NUMBER [-d PATH_TO_DICTIONARY_FILE]"
