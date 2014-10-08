@@ -1,21 +1,17 @@
 module TollFree
   class Dictionary
 
-    def initialize myvariable
-      @dictionary = (File.open(myvariable).readlines).select {
-        |word| word !~ /.*[A-Z].*/ }
-      .map {|word| word.chomp}
+    def initialize path
+      @words = {}
+      File.foreach( path ) do |word|
+        next if word =~ /[A-Z]/
+        @words[word.strip] = true
+      end
     end
 
     def include? word
-      !!bsearch(word)
+      @words.include? word
     end
 
-    def bsearch(e, l = 0, u = @dictionary.length - 1)
-      return if l>u
-      m=(l+u)/2
-      e<@dictionary[m]?u=m-1:l=m+1
-      e==@dictionary[m]?m:bsearch(e,l,u)
-    end
   end
 end

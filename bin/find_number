@@ -4,12 +4,12 @@ require_relative "../lib/toll_free.rb"
 
 begin
   dictionary = "/usr/share/dict/words"
-  if ARGV.include?("-d")
-    index=ARGV.index("-d")
-    ARGV.delete_at(index)
-    dictionary= ARGV.delete_at(index)
+  if ARGV.include?( "-d" )
+    index=ARGV.index( "-d" )
+    ARGV.delete_at( index )
+    dictionary= ARGV.delete_at( index )
   end
-  puts TollFree.find_numbers(dictionary,ARGV[0])
+  puts TollFree.find_numbers( dictionary,ARGV[0] )
 rescue
   abort "USAGE:  #{$PROGRAM_NAME} PHONE_NUMBER [-d PATH_TO_DICTIONARY_FILE]"
 end

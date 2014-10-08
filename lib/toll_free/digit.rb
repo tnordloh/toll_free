@@ -2,7 +2,7 @@ module TollFree
   class Digit
     def initialize number
       @number=number
-      @lookuphash = { 
+      @LOOKUPHASH = { 
         2 => %w[a b c],
         3 => %w[d e f],
         4 => %w[g h i],
@@ -14,11 +14,11 @@ module TollFree
       }
     end
     def valid?
-      !!@lookuphash[@number]
+      !!@LOOKUPHASH[ @number ]
     end
     def letters
       fail "invalid number" unless valid?
-      @lookuphash[@number]
+      @LOOKUPHASH.fetch( @number, "" )
     end
   end
 end

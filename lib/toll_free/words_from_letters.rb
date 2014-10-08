@@ -9,22 +9,23 @@ module TollFree
     attr_accessor :unmatched_string
 
     def find
-      (0...@unmatched_string.length).map {|letter|
-        if @dictionary.include?(@unmatched_string[0..letter])
-          self.class.new(@dictionary,@unmatched_string[letter+1..-1],
-                         *@matches, 
-                         @unmatched_string[0..letter]
-                        ) or raise "bad class creation"
+      ( 0...@unmatched_string.length ).map {|letter|
+        if @dictionary.include?( @unmatched_string[0..letter] )
+          self.class.new( @dictionary,
+                          @unmatched_string[letter+1..-1],
+                          *@matches, 
+                          @unmatched_string[0..letter]
+                        ) 
         end
-      }.select {|list| list != nil}
+      }.compact
     end
 
     def matches
-      @matches.select {|match| match != []}
+      @matches.select { |match| match != [] }
     end
 
     def to_s
-      matches.join("-")
+      matches.join( "-" )
     end
 
     def fully_matched?
