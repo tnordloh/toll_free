@@ -1,21 +1,22 @@
 
 module TollFree
   class WordsFromLetters
-    def initialize dictionary,unmatched_string,*matches 
+    def initialize(dictionary,unmatched_string,*matches)
       @dictionary,@unmatched_string,@matches=
-          dictionary,unmatched_string,matches
+                   dictionary,unmatched_string,matches
     end
 
     attr_accessor :unmatched_string
 
     def find
-      ( 0...@unmatched_string.length ).map {|letter|
-        if @dictionary.include?( @unmatched_string[0..letter] )
+      (0...@unmatched_string.length).map {|letter|
+        potential_match = @unmatched_string[0..letter]
+        if @dictionary.include?(potential_match)
           self.class.new( @dictionary,
                           @unmatched_string[letter+1..-1],
-                          *@matches, 
-                          @unmatched_string[0..letter]
-                        ) 
+                          *@matches,
+                          potential_match
+                        )
         end
       }.compact
     end
@@ -25,13 +26,14 @@ module TollFree
     end
 
     def to_s
-      matches.join( "-" )
+      matches.join("-")
     end
 
     def fully_matched?
-      return true if @unmatched_string == ""
-      return false
+      @unmatched_string == ""
     end
+
   end
+
 end
 

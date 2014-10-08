@@ -3,7 +3,7 @@ module TollFree
 
     def initialize path
       @words = {}
-      File.foreach( path ) do |word|
+      File.foreach(path) do |word|
         next if word =~ /[A-Z]/
         @words[word.strip] = true
       end
