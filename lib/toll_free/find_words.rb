@@ -11,26 +11,20 @@ module TollFree
       @dictionary = TollFree::Dictionary.new(dictionary)
     end
     def possibilities
-      arrays =@digits.map {|digit|
-        digit.letters
-      }
-      possibilities = arrays[0].product(*arrays[1..-1]).map {|possibility| 
+      arrays =@digits.map {|digit| digit.letters }
+      @wordlist = arrays[0].product(*arrays[1..-1]).map {|possibility| 
         possibility.join("")
-      }
-      @wordlist=possibilities.flat_map {|possibility| 
-        subwords(possibility)
-      }
+      }.flat_map {|possibility| subwords(possibility) }
     end
     def to_s
       @wordlist.join("\n")
     end
     def subwords this_word 
-      wfl=TollFree::WordsFromLetters.new(@dictionary, this_word)
-      startlist =wfl.find
+      startlist=TollFree::WordsFromLetters.new(@dictionary, this_word).find
       finallist = []
       while startlist.size > 0 
         list = startlist.shift
-        if list.unmatched_string == ""
+        if list.fully_matched?
           finallist << list
         else
           list.find.each {|item| startlist << item}
