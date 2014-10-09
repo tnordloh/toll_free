@@ -7,7 +7,7 @@ module TollFree
     def initialize phonenumber,
                    dictionary = "/Users/tim/code/toll_free/conf/words"
       @digits = phonenumber.chars.map { |char| TollFree::Digit.new(char.to_i) }
-      @dictionary = TollFree::Dictionary.new(dictionary)
+      @dictionary = TollFree::Dictionary.new(dictionary,phonenumber.length)
     end
 
     def possibilities

@@ -10,12 +10,11 @@ module TollFree
 
     def find
       (0...@unmatched_string.length).map {|letter|
-        potential_match = @unmatched_string[0..letter]
-        if @dictionary.include?(potential_match)
+        if @dictionary.include?( @unmatched_string[0..letter])
           self.class.new( @dictionary,
                           @unmatched_string[letter+1..-1],
                           *@matches,
-                          potential_match
+                          @unmatched_string[0..letter]
                         )
         end
       }.compact

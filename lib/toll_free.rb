@@ -3,11 +3,11 @@ require_relative "toll_free/dictionary"
 
 module TollFree
 
-  def self.find_numbers( dictionary, phone_number )
+  def self.find_numbers(dictionary,phone_number)
 
-    fail "Dictionary file doesn't exist" unless File.exist?( dictionary )
+    fail "Dictionary file doesn't exist" unless File.exist?(dictionary)
 
-    tollfree = TollFree::FindWords.new( phone_number, dictionary )
+    tollfree = TollFree::FindWords.new(phone_number,dictionary)
     tollfree.possibilities
     tollfree.to_s.upcase!
 
