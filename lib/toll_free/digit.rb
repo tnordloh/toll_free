@@ -1,5 +1,6 @@
 module TollFree
   class Digit
+
     def initialize number
       @number=number
       @LOOKUPHASH = {
@@ -13,12 +14,17 @@ module TollFree
         9 => %w[w x y z]
       }
     end
+
     def valid?
       !!@LOOKUPHASH[@number]
     end
+
     def letters
       fail "invalid number" unless valid?
       @LOOKUPHASH.fetch(@number, "")
     end
+
   end
+
 end
+
