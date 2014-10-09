@@ -19,20 +19,18 @@ module TollFree
       return true if @words.include? word
       read_up_to(word) unless @last_word_read==nil
       return true if @words.include? word
-      @nonexistent[word]=false
+      @nonexistent[word]=false #create a small shortcut hash that allows me
+                               # to match against a smaller hash.
       false
     end
 
     private
     
-    def initialize_dictionary_reader
-    end
-
     def read_up_to(word)
       while word > @last_word_read
         1000.times do #check next 1000 words.
-                      #this to preveng the while comparison
-          #from runnig as frequently, which was showing up in 
+                      #this to prevent the while comparison
+          #from runnig on every "while" which was showing up in 
           #the profiler as a reason that the include? function
           #was slow.
           @last_word_read = @reader.resume
